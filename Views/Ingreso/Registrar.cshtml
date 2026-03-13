@@ -1,0 +1,63 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Registrar</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <div>
+        <div class="row justify-content-center mt-5">
+            <div class="col-5">
+                <div class="card">
+                    <div class="card-header"><h3 class="text-center">Login</h3></div>
+                    <div class="card-body">
+
+                        <form action="@Url.Action("Registrar","Ingreso")" method="post">
+
+                            <div class="mb-3">
+                                <label>Correo</label>
+                                <input type="email" name="Correo" class="form-control" value="@(ViewBag.Correo !=null ? ViewBag.Correo : "")" required />
+                            </div>
+                            <div class="mb-3">
+                                <label>Contraseña</label>
+                                <input type="password" class="form-control" name="Clave" value="@(ViewBag.Clave !=null ? ViewBag.Clave : "")" required />
+                            </div>
+                            <div class="mb-3">
+                                <label>Confirmar Contraseña</label>
+                                <input type="password" class="form-control" name="ConfirmarClave" required />
+                            </div>
+
+                            @if (ViewBag.Mensaje != null)
+                            {
+                                <div class="alert alert-danger" role="alert">
+                                    @ViewBag.Mensaje
+                                </div>
+                            }
+
+                            <div class="mb-3">
+                                <div class="d-grid">
+                                    <button class="btn btnbtn-primary" type="submit">Registrarse</button>
+                                    <a class="btn btn-link" href="@Url.Action("Login","Ingreso")">Ya tienes una cuenta? Inicia Sesion</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>

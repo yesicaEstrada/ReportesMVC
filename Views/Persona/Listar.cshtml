@@ -1,0 +1,46 @@
+﻿@model List<PersonaDTO>
+@{
+    ViewData["Title"] = "Listar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        Lista de Personar
+    </div>
+    <div class="card-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Ap. Paterno</th>
+                    <th scope="col">Ap. Materno</th>
+                    <th scope="col">Sexo</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Telefono #1</th>
+                    <th scope="col">Tipo Doc</th>
+                    <th scope="col">Numero Doc</th>
+                    <th scope="col"> -- </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var item in Model)
+                {
+                    <tr>
+                        <td>@item.Appaterno</td>
+                        <td>@item.Apmaterno</td>
+                        <td>@item.NombreSexo</td>
+                        <td>@item.Correo</td>
+                        <td>@item.TelefonoCel1</td>
+                        <td>@item.TipoDoc</td>
+                        <td>@item.NumeroIdentificacion</td>
+                        <td>
+                            <a asp-action="Actualizar" asp-controller="Persona" class="btn btn-primary btn-sm" asp-route-IdPersona="@item.IdPersona">Editar</a>
+                        </td>
+                    </tr>
+                }
+                
+            </tbody>
+        </table>
+    </div>
+</div>
+

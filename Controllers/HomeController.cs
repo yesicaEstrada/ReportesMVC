@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ReportesMVC.Models;
+using ReportesMVC.Services;
 using System.Diagnostics;
 
 namespace ReportesMVC.Controllers
 {
+	[ValidarSesionAttributeService]
 	public class HomeController : Controller
 	{
 		private readonly ILogger<HomeController> _logger;
@@ -22,6 +24,12 @@ namespace ReportesMVC.Controllers
 		{
 			return View();
 		}
+
+		public IActionResult CerrarSesion()
+		{
+            HttpContext.Session.Clear();
+            return RedirectToAction("Login", "Ingreso");
+        }
 
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 		public IActionResult Error()

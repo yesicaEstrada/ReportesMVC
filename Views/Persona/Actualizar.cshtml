@@ -1,0 +1,74 @@
+﻿@model PersonaDTO
+@{
+    ViewData["Title"] = "Actualizar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div>
+    <div class="row justify-content-center mt-5">
+        <div class="col-5">
+            <div class="card">
+                <div class="card-header"><h3 class="text-center">Actualizar Persona</h3></div>
+                <div class="card-body">
+
+                    <form asp-action="Actualizar" asp-controller="Persona" method="post">
+
+                        <div class="mb-3">
+                            <input type="hidden" asp-for="IdPersona" class="form-control" required />
+                        </div>
+                        <div class="mb-3">
+                            <label>Apellido Paterno</label>
+                            <input type="text" class="form-control" asp-for="Appaterno" required />
+                        </div>
+                        <div class="mb-3">
+                            <label>Apellido Materno</label>
+                            <input type="text" class="form-control" asp-for="Apmaterno" required />
+                        </div>
+                        <div class="mb-3">
+                            <label>Sexo</label>
+                            <select asp-for="IdSexo" class="form-control form-control-sm">
+                                <option value="1">Hombre</option>
+                                <option value="2">Mujer</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label>Correo</label>
+                            <input type="email" class="form-control" asp-for="Correo" required />
+                        </div>
+                        <div class="mb-3">
+                            <label>Numero Telefonico</label>
+                            <input type="number" class="form-control" asp-for="TelefonoCel1" required />
+                        </div>
+                        <div class="mb-3">
+                            <label>Tipo Identificación</label>
+                            <select asp-for="IidTipoDocumento" class="form-control form-control-sm">
+                                <option value="1">DNI/CURP</option>
+                                <option value="2">Carnet Extranjeria</option>
+                                <option value="3">Pasaporte</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label>Numero Identificación</label>
+                            <input type="text" class="form-control" asp-for="NumeroIdentificacion" required />
+                        </div>
+
+                        @if (ViewBag.Mensaje != null)
+                        {
+                            <div class="alert alert-danger" role="alert">
+                                @ViewBag.Mensaje
+                            </div>
+                        }
+
+                        <div class="mb-3">
+                            
+                                <button class="btn btnbtn-primary" type="submit">Guardar</button>
+                                <a class="btn btn-link" asp-action="Listar" asp-controller="Persona">Volver al listado</a>
+                            
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
