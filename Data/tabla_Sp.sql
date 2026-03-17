@@ -34,7 +34,7 @@ end
 
 create proc sp_ValidarUsuario(
 	@correo varchar(100),
-	@clave varchar(500)
+	@clave varchar(100)
 )
 as 
 begin
@@ -47,19 +47,21 @@ end
 
 
 -- procedimientos de la tabla personas
-CREATE PROCEDURE Sp_ConsultaPersona
+create PROCEDURE Sp_ConsultaPersona
 AS
 BEGIN
 SET NOCOUNT ON;
 	SELECT IIDPERSONA, APPATERNO, APMATERNO, s.nombre as NOMBRE_SEXO, CORREO, TELEFONOOCELULAR1, t.NOMBRE as TIPODOC, NUMEROIDENTIFICACION 
 	FROM [dbo].[Persona] AS p WITH (NOLOCK)
+	
 	INNER JOIN [dbo].[Sexo] as s
 	on p.IIDSEXO = S.IIDSEXO
 	inner join [dbo].[TipoDocumentoIdentificacion] as t
 	on p.IIDTIPODOCUMENTO = t.IIDTIPODOCUMENTO
+	where P.BHABILITADO = 1
 END
 
-EXEC Sp_ConsultaPersona
+EXEC Sp_ConsultaPersona 
 
 -- procedimientos de la tabla personas
 CREATE PROCEDURE Sp_ConsultaXIdPersona
@@ -99,3 +101,15 @@ BEGIN
 	NUMEROIDENTIFICACION = @NUMEROIDENTIFICACION
 	WHERE IIDPERSONA = @IIDPERSONA
 END
+
+
+create proc Sp_INACTIVARXId(
+@ID INT
+)
+AS
+BEGIN 
+		UPDATE [dbo].[Persona] SET  BHABILITADO = 0 WHERE IIDPERSONA = @ID 
+	
+end
+
+exec Sp_INACTIVARXId 2

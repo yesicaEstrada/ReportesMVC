@@ -112,6 +112,34 @@ namespace ReportesMVC.Data
 
             return rpta;
         }
+
+        public bool inactivarXId(int id)
+        {
+            bool rpta = false;
+            try
+            {
+                var con = new DbConexion();
+
+                using (var cn = new SqlConnection(con.getCadenaSql()))
+                {
+
+                    cn.Open();
+                    SqlCommand comd = new SqlCommand("Sp_INACTIVARXId", cn);
+                    comd.Parameters.AddWithValue("@ID", id);
+                    comd.CommandType = CommandType.StoredProcedure;
+
+                    comd.ExecuteNonQuery();
+                }
+                return rpta = true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+                rpta = false;
+            }
+            return rpta;
+        }
+        
     }
 
 

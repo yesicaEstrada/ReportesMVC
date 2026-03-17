@@ -22,19 +22,19 @@ namespace ReportesMVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(UsuarioDTO usuario)
+        public ActionResult Login(String correo, String clave)
         {
-            var clave = UtilityServices.ConvertirSHA256(usuario.Clave); //la clave que ingresen la encripte
-            usuario.IdUsuario = _usuarioDbContext.ValidarUsuario(usuario.Correo, clave);
+            var claveE = UtilityServices.ConvertirSHA256(clave); //la clave que ingresen la encripte
+            var IdUsuario = _usuarioDbContext.ValidarUsuario(correo, claveE);
 
-            if(usuario.IdUsuario != 0)
+            if(IdUsuario != 0)
             {
-                HttpContext.Session.SetString("correo", usuario.Correo);
+                HttpContext.Session.SetString("correo", correo);
                 return RedirectToAction("Listar", "Persona");
             }
             else
             {
-                ViewData["Mensaje"] = "usuario no encontrado";
+                ViewData["Mensaje"] = "Credenciales incorrectas, valide por favor!";
                 return View();
             }
         }

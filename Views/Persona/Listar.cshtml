@@ -35,7 +35,17 @@
                         <td>@item.NumeroIdentificacion</td>
                         <td>
                             <a asp-action="Actualizar" asp-controller="Persona" class="btn btn-primary btn-sm" asp-route-IdPersona="@item.IdPersona">Editar</a>
+                            <a asp-action="InactivarId" asp-controller="Persona" class="btn btn-primary btn-sm" asp-route-IdPersona="@item.IdPersona">Inactivar</a>
                         </td>
+
+                        @if (TempData["Mensaje"] != null)
+                        {
+                            <script type="text/javascript">
+                                window.onload = function () {
+                                    alert('@TempData["Mensaje"]');
+                                };
+                            </script>
+                        }
                     </tr>
                 }
                 
@@ -43,4 +53,3 @@
         </table>
     </div>
 </div>
-

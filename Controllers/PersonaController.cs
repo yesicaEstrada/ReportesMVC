@@ -37,6 +37,23 @@ namespace ReportesMVC.Controllers
             }
         }
 
+        public IActionResult InactivarId(int IdPersona)
+        {
+            var respuesta = _personaContext.inactivarXId(IdPersona);
+
+            if (respuesta)
+            {
+                TempData["Mensaje"] = "Inactivado correctamente";
+                return RedirectToAction("Listar");
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+
+
 
 
     }
